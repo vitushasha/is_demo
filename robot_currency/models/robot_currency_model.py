@@ -6,6 +6,7 @@ class CurrencyRobot(BaseRobot):
     CODE = 'currency_robot'
     NAME = 'Робот возвращает текущий курс валюты по ЦБРФ'
     USE_SUBSCRIPTION = True
+    city = "Moscow"
 
     PROPERTIES = {
         'user': {

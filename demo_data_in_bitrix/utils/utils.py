@@ -4,7 +4,7 @@ from datetime import datetime
 
 import requests
 
-from callsuploader.models.models import CallInfo
+from calls_uploader.models.models import CallInfo
 from django.conf import settings
 
 from openpyxl import load_workbook
@@ -51,6 +51,7 @@ def load_crm(crm_items, but, type_id):
     # выгружает элменты crm в битрикс
     methods = []
     for item in crm_items:
+
         methods.append(('crm.item.batchImport',
                         {"entityTypeId": type_id, "data": [item]}))
     but.batch_api_call(methods)

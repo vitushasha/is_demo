@@ -12,7 +12,7 @@
 {% endblock %}
 
 {% block content %}
-    <form action="{% url 'load_from_googledocs'%}" method="post" class="import-form" enctype="multipart/form-data">
+    <form action="{% url 'import_data:load_from_googledocs'%}" method="post" class="import-form" enctype="multipart/form-data">
 {#        <h3>Добавить или ссылку на файл, или добавьте свой файл</h3>#}
         <p class="text">Добавьте ссылку на google таблицы: <input type="text" name="link"></p>
         <span>Пример google таблицы https://docs.google.com/spreadsheets/d/1ZuKXEK0hwJyxFwGxoi77G0PaOh4Qg4SDZBNkHDws2iU/edit#gid=1891471437

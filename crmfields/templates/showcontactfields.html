@@ -1,44 +1,43 @@
-{% extends "base_app.html" %}
+<!DOCTYPE html>
+<html lang="en">
 
-{% block title %}
-    Анализ текстовых полей сущности "Контакты"
-{% endblock %}
+<head>
+    <meta charset="UTF-8">
+    <title>Таблица пользователей</title>
+    <script src="https://cdn.jsdelivr.net/npm/ag-grid-community/dist/ag-grid-community.min.js"></script>
+</head>
 
-{% block header %}
-    <div class="header">
-        <h1>Анализ текстовых полей сущности "Контакты"</h1>
-        <button onclick="document.location='{% url 'reload_start'%}'">Назад</button>
-    </div>
-{% endblock %}
+<body>
+<button onclick="document.location='{% url 'reload_start'%}'">Назад</button>
 
-{% block content %}
-    <h2>Всего полей контактов: {{ len_res }}</h2>
-  <table>
-    <thead>
-      <tr>
-        <th>ID</th>
-        <th>Название</th>
-        <th>Тип</th>
-        <th>Обязательное</th>
-        <th>Только для чтения</th>
-        <th>Неизменяемое</th>
-        <th>Множественное</th>
-        <th>Динамическое</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for k, v in res.items %}
-      <tr>
-        <td>{{ k }}</td>
-        <td>{% if v.filterLabel %}{{ v.filterLabel }}{% else %}{{ v.title }}{% endif %}</td>
-        <td>{{ v.type }}</td>
-        <td>{{ v.isRequired }}</td>
-        <td>{{ v.isReadOnly }}</td>
-        <td>{{ v.isImmutable }}</td>
-        <td>{{ v.isMultiple }}</td>
-        <td>{{ v.isDynamic }}</td>
-      </tr>
-      {% endfor %}
-    </tbody>
-  </table>
-{% endblock %}
+<div id="myGrid" class="ag-theme-quartz" style="height: 100vh; width: 100vw; padding-top: 40px"></div>
+
+<script>
+    const user = {{ users|safe }}
+
+    let gridOptions = {
+        defaultColDef: {
+            floatingFilter: true,
+            resizable: true,
+            sortable: true,
+            filter: true,
+            autoHeight: true,
+        },
+        columnDefs: [
+            {headerName: 'Имя', field: 'NAME'},
+            {headerName: 'Фамилия', field: 'LAST_NAME'},
+            {headerName: 'ID', field: 'ID'},
+            {headerName: 'EMAIL', field: 'EMAIL'}
+        ],
+        rowData: user,
+        sideBar: true,
+        onGridReady: function(params) {
+            params.columnApi.autoSizeAllColumns();
+        }
+
+    }
+    const myGridElement = document.querySelector('#myGrid');
+    agGrid.createGrid(myGridElement, gridOptions);
+</script>
+</body>
+</html>

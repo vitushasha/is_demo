@@ -1,7 +1,7 @@
 from vendors.tinkoff.python.tinkoff.cloud.stt.v1 import stt_pb2_grpc, stt_pb2
 import grpc
 from vendors.tinkoff.python.auth import authorization_metadata
-
+import base64
 from django.conf import settings
 
 from mutagen.mp3 import MP3
@@ -73,8 +73,14 @@ class CallInfo(models.Model):
             "CALL_ID": self.call_id,
             "USER_ID": self.user_id,
             "DURATION": self.duration,
-            "RECORD_URL": f'https://{settings.APP_SETTINGS.app_domain}/media/{self.inner_media_path}{self.filename}.mp3',
             "ADD_TO_CHAT": self.add_to_chat,
+        })
+
+    def telephony_externalCall_attachRecord(self, but):
+        but.call_api_method('telephony.externalCall.attachRecord',{
+            'CALL_ID': self.call_id,
+            'FILE_NAME': self.filename,
+            'FILE_CONTENT': base64.b64encode(self.file.file.read()),
         })
 
     def wav_maker_n_messages(self, but):

@@ -34,7 +34,7 @@ INSTALLED_APPS = [
     'tasks',
     'ones_fresh_unf_with_b24',
     'crmfields',
-    'callsuploader',
+    'calls_uploader',
     'duplicatefinder',
     'usermanager',
     'selectuser',
@@ -52,7 +52,23 @@ INSTALLED_APPS = [
     'tg_openai_bot',
     'deal_for_powerbi',
     'autocomplete_crm_tasks',
-    'move_tasks_deadline_js'
+    'move_tasks_deadline_js',
+    'call_register',
+    'productsfinder',
+    'supervisorsfinder',
+    'runbizproc',
+    'import_data',
+    'bestcallmanager',
+    'sort_companies',
+    'convert_an_audio_to_text',
+    'upload_call_in_telegram',
+    'download_deals',
+    'robot_weather_app',
+    'download_companies_in_db',
+    'move_deadline_app',
+    'select_user',
+    'yandex_map',
+    'chat_bot',
 ]
 
 MIDDLEWARE = [

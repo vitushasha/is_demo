@@ -15,7 +15,7 @@ def keep_call_info_synced(but, bot_token, calls_chat_id):
         except TypeError:
             # если вдруг в базе нет последнего id, берем последний звонок
             first_call_id = but.call_list_method('voximplant.statistic.get', {'SORT': 'ID', 'ORDER': 'DESC'}, limit=1)[0]['ID']
-        last_call_id = send_calls(but, bot, calls_chat_id, first_call_id)
+        last_call_id = send_calls(but, bot, calls_chat_id, first_call_id)  # использовать get_calls_with_files
         if last_call_id is not None:
             but.call_api_method('app.option.set', {'options': {'last_call_id': last_call_id}})
         flag = but.call_api_method('app.option.get')['result']['call_sync_flag']

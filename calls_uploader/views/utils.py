@@ -1,6 +1,6 @@
-from callsuploader.utils.python.tinkoff.cloud.stt.v1 import stt_pb2_grpc, stt_pb2
+from calls_uploader.utils.python.tinkoff.cloud.stt.v1 import stt_pb2_grpc, stt_pb2
 import grpc
-from callsuploader.utils.python.auth import authorization_metadata
+from calls_uploader.utils.python.auth import authorization_metadata
 from _local_settings import ENDPOINT, API_KEY, SECRET_KEY
 
 from pydub import AudioSegment
