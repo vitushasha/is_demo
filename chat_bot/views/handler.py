@@ -4,7 +4,6 @@ from django.views.decorators.csrf import csrf_exempt
 
 from integration_utils.bitrix24.bitrix_user_auth.main_auth import main_auth
 from integration_utils.bitrix24.models import BitrixUser
-import json
 from ..models.chatbot import ChatBotModel
 
 @csrf_exempt
@@ -38,7 +37,7 @@ def delete_handler(request):
             event = data['event']
             if event == 'ONIMBOTDELETE':
                 bot_id, dialog_id, bot = get_chat_info(data)
-                client_id = data['data']['CLIENT_ID']
+                client_id = data['[data][CLIENT_ID]']
                 response = but.call_api_method('imbot.unregister', {'BOT_ID': bot_id, 'CLIENT_ID': client_id})
 
                 return JsonResponse({'status': 'ok', 'response': response})
