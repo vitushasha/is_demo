@@ -34,7 +34,7 @@ def delete_handler(request):
     but = BitrixUser.objects.filter(is_admin=True).first().bitrix_user_token
     if request.method == 'POST':
         try:
-            data = json.loads(request.bode.decode('utf-8'))
+            data = request.POST
             event = data['event']
             if event == 'ONIMBOTDELETE':
                 bot_id, dialog_id, bot = get_chat_info(data)
@@ -60,7 +60,7 @@ def message_handler(request):
     response = 'Некорректный запрос'
     if request.method == 'POST':
         try:
-            data = json.loads(request.body.decode('utf-8'))
+            data = request.POST
             event = data['event']
             if event == 'ONIMBOTMESSAGEADD':
                 bot_id, dialog_id, bot = get_chat_info(data)
