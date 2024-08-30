@@ -1,0 +1,80 @@
+{% extends 'base_app.html' %}
+
+{% block title %}
+    Распознавание аудио
+{% endblock %}
+
+{% block header %}
+    <h1>Приложение для перевода аудио в текст</h1>
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h2>Загрузите аудиофайл для преобразования</h2>
+        <form action="{% url 'convert_an_audio_to_text:start_convert' %}" method="post" enctype="multipart/form-data" class="upload-form">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn-submit">Отправить</button>
+        </form>
+
+        {% if response %}
+            <div class="response-message">
+                {% if response.text %}
+                    <p class="success-message">{{ response.text }}</p>
+                {% else %}
+                    <p class="error-message">{{ response.error }}</p>
+                {% endif %}
+            </div>
+        {% endif %}
+    </div>
+
+    <!-- Включаем CSS стили -->
+    <style>
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            font-size: 24px;
+            color: #333;
+            text-align: center;
+        }
+        .upload-form {
+            margin: 20px 0;
+        }
+        .upload-form p {
+            margin: 10px 0;
+        }
+        .btn-submit {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .btn-submit:hover {
+            background-color: #0056b3;
+        }
+        .response-message {
+            margin-top: 20px;
+            padding: 10px;
+            border-radius: 4px;
+        }
+        .success-message {
+            color: #28a745;
+            font-size: 18px;
+        }
+        .error-message {
+            color: #dc3545;
+            font-size: 18px;
+        }
+    </style>
+{% endblock %}

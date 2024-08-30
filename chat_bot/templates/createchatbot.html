@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Приложение для создания чат-бота</title>
+  <script src="//api.bitrix24.com/api/v1/"></script>
+</head>
+<body>
+    <h1>Здесь вы можете создать чат-бота для Битрикс24</h1>
+    <form action="{% url 'chat_bot:create_chat_bot' %}" method="post" enctype="multipart/form-data">
+        {{ form.as_p }}
+        {% csrf_token %}
+        <input type="submit" value="Отправить">
+    </form>
+{% if response %}
+    <p>{{ response }}</p>
+{% endif %}
+</body>
+</html>

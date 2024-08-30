@@ -1,0 +1,37 @@
+{% extends "base_app.html" %}
+
+{% block title %}
+    Дубликаты товаров на портале
+{% endblock %}
+
+{% block header %}
+    <div class="header">
+        <h1>Lубликаты товаров на портале:</h1>
+    </div>
+{% endblock %}
+
+{% block content %}
+    {% if res %}
+        <div>
+            <table>
+                <tr>
+                    <th>Товар</th>
+                    <th>Количество дубликатов</th>
+                </tr>
+                {% for name, count in res.items %}
+                    <tr>
+                        <td>{{ name }}</td>
+                        <td>{{ count }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+            <button onclick="document.location='{% url 'reload_start'%}'">Назад</button>
+        </div>
+    {% else %}
+        <form action="{% url 'products_finder:search' %}" method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <p><input class="input122" type="submit" value="выбрать"></p>
+        </form>
+    {% endif %}
+{% endblock %}

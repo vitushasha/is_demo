@@ -1,0 +1,17 @@
+{% extends "base_app.html" %}
+
+{% block title %}
+    Загрузка звонка (.mp3) на портал Битрикс24
+{% endblock %}
+
+
+{% block header %}
+    <div class="header">
+        <h1 class="h122">Загрузить товары в excel</h1>
+        <button onclick="goBack()">Назад</button>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <a href="{{ file_path }}" download>Скачать файл</a>
+{% endblock %}

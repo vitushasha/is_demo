@@ -1,0 +1,41 @@
+{% extends "base_app.html" %}
+
+{% block title %}
+    Руководители пользователей
+{% endblock %}
+
+{% block header %}
+    <div class="header">
+        <h1>Список Пользователей и их руководителей</h1>
+    </div>
+{% endblock %}
+
+{% block content %}
+    {% if info %}
+        <div>
+            <table>
+                <tr>
+                    <th>Имя пользователя</th>
+                    <th>Департамент</th>
+                    <th>Руководитель</th>
+                </tr>
+                {% for user, supervisors in info.items %}
+                    <tr>
+                        <td>{{ user }}</td>
+                    {% for supervisor in supervisors %}
+                            <td>{{ supervisor.department_name }}</td>
+                            <td>{{ supervisor.supervisor_name }}</td>
+                    {% endfor %}
+                    </tr>
+                {% endfor %}
+            </table>
+            <button onclick="document.location='{% url 'reload_start'%}'">Назад</button>
+        </div>
+    {% else %}
+        <form action="{% url 'supervisorsfinder:search' %}" method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <p><input class="input122" type="submit" value="выбрать"></p>
+        </form>
+    {% endif %}
+{% endblock %}

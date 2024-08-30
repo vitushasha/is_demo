@@ -1,0 +1,30 @@
+{% extends "base_app.html" %}
+
+{% block title %}
+    Робот который возвращает текущий курс валюты по ЦБРФ
+{% endblock %}
+
+{% block header %}
+    <div class="header">
+        <h1>Робот который возвращает актуальную информаци о погоде в указанном городе</h1>
+        <button onclick="document.location='{% url 'reload_start'%}'">Назад</button>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div>
+        <form action="{% url 'bitrix_robot_weather:install' %}" method="POST">
+            {% csrf_token %}
+            <button class="c-button">Установить</button>
+        </form>
+
+        <form action="{% url 'bitrix_robot_weather:uninstall' %}" method="POST">
+            <button class="c-button">Удалить</button>
+        </form>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    <script src="//api.bitrix24.com/api/v1/"></script>
+{% endblock %}
+{% load static %}

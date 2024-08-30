@@ -1,0 +1,44 @@
+{% extends 'base_app.html' %}
+
+
+{% block title %}
+    Выгрузка компаний
+{%  endblock %}
+
+
+{% block header %}
+    <div>
+        <h1>Это приложение для закгрузки компаний в Базу Данных</h1>
+        <button class="salam" onclick="document.location='{% url 'reload_start'%}'">Назад</button>
+    </div>
+{% endblock %}
+
+
+{% block content %}
+    {% if request.bitrix_user.is_admin %}
+        <div>
+            <form action="{% url 'move_deadline_app:bind_handler' %}" method="post">
+                {% csrf_token %}
+                <label for="options">Выберите значение:</label>
+                  <select id="options" name="type">
+                    <option value="js">js</option>
+                    <option value="admin">admin</option>
+                    <option value="self">self</option>
+                  </select>
+                <input type="submit" value="Привязать кнопку к окну с задачей">
+            </form>
+            <form action="{% url 'move_deadline_app:unbind_handler' %}" method="post">
+                {% csrf_token %}
+                <label for="options">Выберите значение:</label>
+                  <select id="options" name="type">
+                    <option value="js">js</option>
+                    <option value="admin">admin</option>
+                    <option value="self">self</option>
+                  </select>
+                <button>Отвязать кнопку от окна с задачей</button>
+            </form>
+        </div>
+    {% endif %}
+{% endblock %}
+
+<script src="//api.bitrix24.com/api/v1/"></script>

@@ -1,0 +1,88 @@
+{%  extends 'base_app.html' %}
+
+{%  block title %}
+    Сортировка по значениям пользовательского поля
+{% endblock %}
+
+{% block header %}
+    <div class="header">
+        <h1>Приложение "Сортировка по значениям пользовательского поля"</h1>
+        <button class="salam" onclick="document.location='{% url 'reload_start'%}'">Назад</button>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <form action="{% url 'sort_companies:sort' %}" method="post" enctype="multipart/form-data">
+        <p><button id="btn-start-find" type="submit">Отсортировать</button></p>
+    </form>
+    {% if flag %}
+        <p>Компании успешно отсортированы</p>
+    {% endif %}
+{% endblock %}
+
+{% block styles %}
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        .header {
+            background-color: #007bff;
+            padding: 10px;
+            text-align: center;
+            color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            margin: 0;
+        }
+
+        button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 12px 20px; /* Увеличение размера кнопок */
+            margin: 5px;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Добавление тени */
+            border-radius: 20px; /* Закругление углов кнопок */
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; /* Изменение шрифта */
+            font-size: 16px; /* Изменение размера шрифта */
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        form {
+            display: inline-block;
+        }
+
+        .content {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .salam {
+            background-color: darkred;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .info-text {
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            font-size: 16px;
+            color: #333;
+            margin-top: 40px; /* увеличим верхний отступ */
+            margin-bottom: 20px; /* добавим нижний отступ */
+            text-align: center;
+        }
+
+    </style>
+{% endblock %}

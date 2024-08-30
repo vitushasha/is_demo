@@ -1,0 +1,88 @@
+{% extends 'base_app.html' %}
+
+
+{% block title %}
+    Выгрузка компаний
+{%  endblock %}
+
+
+{% block header %}
+    <div>
+        <h1>Это приложение для закгрузки компаний в Базу Данных</h1>
+        <button class="salam" onclick="document.location='{% url 'reload_start'%}'">Назад</button>
+    </div>
+{% endblock %}
+
+
+{% block content %}
+    <button onclick="document.location='{% url 'download_companies_in_db:sync_companies'%}'">Загрузить</button>
+{% endblock %}
+
+<script src="//api.bitrix24.com/api/v1/"></script>
+
+{% block styles %}
+    <style>
+        body {
+            font-family: "Times New Roman", sans-serif;
+            background-color: #f8f8f8;
+            color: #222;
+            margin: 0;
+            padding: 0;
+        }
+
+        .header {
+            background-color: #11a4b5;
+            padding: 10px;
+            text-align: center;
+            color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            margin: 0;
+        }
+
+        button {
+            background-color: #11a4b5;
+            color: #fff;
+            border: none;
+            padding: 12px 20px; /* Увеличение размера кнопок */
+            margin: 5px;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Добавление тени */
+            border-radius: 20px; /* Закругление углов кнопок */
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; /* Изменение шрифта */
+            font-size: 16px; /* Изменение размера шрифта */
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        form {
+            display: inline-block;
+        }
+
+        .content {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .salam {
+            background-color: darkred;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .info-text {
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            font-size: 16px;
+            color: #333;
+            margin-top: 40px; /* увеличим верхний отступ */
+            margin-bottom: 20px; /* добавим нижний отступ */
+            text-align: center;
+        }
+
+    </style>
+{% endblock %}
